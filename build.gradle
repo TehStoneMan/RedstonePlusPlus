@@ -1,0 +1,178 @@
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies { classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true }
+}
+apply plugin: 'net.minecraftforge.gradle'
+
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+archivesBaseName = 'RedstonePP'
+group = 'io.github.thestoneman.redstonepp'
+version = "$minecraft_version-$version_major.$version_api.$version_minor.$version_patch"
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+			resources {
+				include '**/**'
+				exclude '**/**.lang'
+				exclude '**/**.blend*'
+				exclude '**/**.obj'
+				exclude '**/**.mtl'
+				exclude '**/**.model'
+				exclude '**/**.xcf'
+			}
+		}
+	}
+}
+
+minecraft {
+    mappings channel: 'snapshot', version: '20200514-1.15.1'
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    
+    // accessTransformer = file('build/resources/main/META-INF/accesstransformer.cfg')
+
+    // Run configurations.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                redstonepp { source sourceSets.main }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                redstonepp { source sourceSets.main }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+
+            mods {
+                redstonepp { source sourceSets.main }
+            }
+        }
+    }
+}
+
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+build.dependsOn sourcesJar
+
+task deobfJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+build.dependsOn deobfJar
+
+task javadocJar(type: Jar, dependsOn: classes) {
+    from javadoc
+    classifier = 'javadoc'
+}
+build.dependsOn javadocJar
+
+artifacts {
+    archives sourcesJar
+    archives deobfJar
+    archives javadocJar
+}
+
+// Process resources on build
+processResources {
+	// This will ensure that this task is redone when the version changes.
+	inputs.property 'version', project.version
+	
+	// Replace stuff in mods.toml, nothing else
+	from( sourceSets.main.resources ) {
+		include 'META-INF/mods.toml'
+		
+		// Replace version
+		expand 'version':project.version
+	}
+	
+	// Copy everything else except the mods.toml
+	from( sourceSets.main.resources ) {
+		exclude 'META-INF/mods.toml'
+	}
+}
+
+// Example for how to get properties into the manifest for reading by the runtime..
+jar {
+    manifest {
+        attributes ([
+            "Specification-Title": "redstonepp",
+            "Specification-Vendor": "TehStoneMan",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"TehStoneMan",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+// Example configuration to allow publishing using the maven-publish task
+// we define a custom artifact that is sourced from the reobfJar output task
+// and then declare that to be published
+// Note you'll need to add a repository here
+def reobfFile = file("$buildDir/reobfJar/output.jar")
+def reobfArtifact = artifacts.add('default', reobfFile) {
+    type 'jar'
+    builtBy 'reobfJar'
+}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact reobfArtifact
+            artifact deobfJar
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}

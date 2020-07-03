@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:block",
+	"pools":
+	[
+		{
+			"name": "restonepp",
+			"rolls": 1,
+			"entries":
+			[
+				{
+					"type": "minecraft:item",
+					"name": "redstonepp:redstone_inverter"
+				}
+			],
+			"conditions":
+			[
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		}
+	]
+}

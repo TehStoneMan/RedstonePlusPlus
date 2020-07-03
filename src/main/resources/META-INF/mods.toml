@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+[[mods]]
+modId="redstonepp"
+version="${file.jarVersion}"
+displayName="Redstone++"
+updateJSONURL="http://tehstoneman.github.io/redstonepp.json"
+displayURL="http://minecraft.curseforge.com/projects/redstonepp"
+logoFile="RedstonePPLogo.png"
+authors="TehStoneMan"
+description='''
+Redstone enhancement project.
+'''
