@@ -9,7 +9,7 @@
 			[
 				{
 					"type": "minecraft:item",
-					"name": "redstonepp:redstone_inverter"
+					"name": "redstonepp:inverter"
 				}
 			],
 			"conditions":

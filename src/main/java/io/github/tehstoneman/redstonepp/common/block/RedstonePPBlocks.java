@@ -8,7 +8,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class RedstonePPBlocks
 {
-	public static final DeferredRegister< Block >		REGISTERY	= new DeferredRegister<>( ForgeRegistries.BLOCKS, ModInfo.MOD_ID );
+	public static final DeferredRegister< Block >			REGISTERY			= new DeferredRegister<>( ForgeRegistries.BLOCKS, ModInfo.MOD_ID );
 
-	public static RegistryObject< RedstoneInverterBlock > REDSTONE_INVERTER = REGISTERY.register( "redstone_inverter", () -> new RedstoneInverterBlock() );
+	public static RegistryObject< RedstoneInverterBlock >	REDSTONE_INVERTER	= REGISTERY.register( "inverter", () -> new RedstoneInverterBlock() );
+	public static RegistryObject< AndGateBlock >			AND_GATE			= REGISTERY.register( "and_gate", () -> new AndGateBlock() );
 }

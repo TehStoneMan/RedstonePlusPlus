@@ -24,15 +24,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RedstoneInverterBlock extends HorizontalBlock
+public class AndGateBlock extends HorizontalBlock
 {
 	protected static final VoxelShape	SHAPE	= Block.makeCuboidShape( 0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D );
 	public static final BooleanProperty	POWERED	= BlockStateProperties.POWERED;
 
-	protected RedstoneInverterBlock()
+	protected AndGateBlock()
 	{
 		super( Properties.from( Blocks.REPEATER ) );
-		setDefaultState( stateContainer.getBaseState().with( HORIZONTAL_FACING, Direction.NORTH ).with( POWERED, Boolean.valueOf( true ) ) );
+		setDefaultState( stateContainer.getBaseState().with( HORIZONTAL_FACING, Direction.NORTH ).with( POWERED, Boolean.valueOf( false ) ) );
 	}
 
 	@Override
@@ -69,12 +69,14 @@ public class RedstoneInverterBlock extends HorizontalBlock
 		{
 			final Direction direction = thisState.get( HORIZONTAL_FACING );
 			final boolean isPowered = thisState.get( POWERED );
-			final int power = getPowerFromSide( world, thisPos, direction );
+			final int powerA = getPowerFromSide( world, thisPos, direction.rotateY() );
+			final int powerB = getPowerFromSide( world, thisPos, direction.rotateYCCW() );
+			final int powerOutput = Math.min( powerA, powerB );
 
-			if( isPowered && power > 0 )
-				world.setBlockState( thisPos, thisState.with( POWERED, false ), 3 );
-			else if( !isPowered && power == 0 )
+			if( isPowered && powerA > 0 )
 				world.setBlockState( thisPos, thisState.with( POWERED, true ), 3 );
+			else if( !isPowered && powerA == 0 )
+				world.setBlockState( thisPos, thisState.with( POWERED, false ), 3 );
 		}
 		else
 		{

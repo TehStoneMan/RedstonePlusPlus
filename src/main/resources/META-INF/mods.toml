@@ -1,13 +1,20 @@
 modLoader="javafml"
-loaderVersion="[28,)"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/TehStoneMan/RedstonePlusPlus/issues"
+
 [[mods]]
 modId="redstonepp"
-version="${file.jarVersion}"
+version="${version}"
 displayName="Redstone++"
 updateJSONURL="http://tehstoneman.github.io/redstonepp.json"
-displayURL="http://minecraft.curseforge.com/projects/redstonepp"
-logoFile="RedstonePPLogo.png"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/restoneplusplus"
+logoFile="logo.png"
 authors="TehStoneMan"
-description='''
-Redstone enhancement project.
-'''
+description='''Redstone enhancement project.'''
+
+[[dependencies.betterstorage]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31.2.0,)"
+    ordering="NONE"
+    side="BOTH"

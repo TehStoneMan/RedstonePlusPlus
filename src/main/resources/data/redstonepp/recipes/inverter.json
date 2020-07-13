@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "redstonepp:inverter",
+	"pattern":
+	[
+		"#X#",
+		"III"
+	],
+	"key":
+	{
+		"#": { "item": "minecraft:redstone_torch" },
+		"X": { "tag": "minecraft:planks" },
+		"I": { "item": "minecraft:stone" }
+	},
+	"result": { "item": "redstonepp:inverter" }
+}
