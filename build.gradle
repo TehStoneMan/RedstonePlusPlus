@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-archivesBaseName = 'RedstonePP'
-group = 'io.github.thestoneman.redstonepp'
+archivesBaseName = 'RedstoneXtra'
+group = 'io.github.thestoneman.redstonextra'
 version = "$minecraft_version-$version_major.$version_api.$version_minor.$version_patch"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
@@ -141,7 +141,7 @@ processResources {
 jar {
     manifest {
         attributes ([
-            "Specification-Title": "redstonepp",
+            "Specification-Title": "redstonextra",
             "Specification-Vendor": "TehStoneMan",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,

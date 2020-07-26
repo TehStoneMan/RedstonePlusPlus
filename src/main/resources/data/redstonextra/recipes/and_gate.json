@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "redstonextra:and_gate",
+	"pattern":
+	[
+		"#",
+		"X",
+		"Q"
+	],
+	"key":
+	{
+		"#": { "tag": "minecraft:wooden_buttons" },
+		"X": { "item": "minecraft:comparator" },
+		"Q": { "tag": "forge:gems/quartz" }
+	},
+	"result": { "item": "redstonextra:and_gate" }
+}

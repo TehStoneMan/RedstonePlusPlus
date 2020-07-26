@@ -1,12 +1,12 @@
 modLoader="javafml"
 loaderVersion="[31,)"
-issueTrackerURL="https://github.com/TehStoneMan/RedstonePlusPlus/issues"
+issueTrackerURL="https://github.com/TehStoneMan/RedstoneXtra/issues"
 
 [[mods]]
-modId="redstonepp"
+modId="redstonextra"
 version="${version}"
-displayName="Redstone++"
-updateJSONURL="http://tehstoneman.github.io/redstonepp.json"
+displayName="RedstoneXtra"
+updateJSONURL="http://minecraft.tehstoneman.com/redstonextra.json"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/restoneplusplus"
 logoFile="logo.png"
 authors="TehStoneMan"
