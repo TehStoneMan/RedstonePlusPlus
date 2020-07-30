@@ -12,4 +12,5 @@ public class RedstoneXtraBlocks
 
 	public static RegistryObject< RedstoneInverterBlock >	REDSTONE_INVERTER	= REGISTERY.register( "inverter", () -> new RedstoneInverterBlock() );
 	public static RegistryObject< AndGateBlock >			AND_GATE			= REGISTERY.register( "and_gate", () -> new AndGateBlock() );
+	public static RegistryObject< OrGateBlock >				OR_GATE				= REGISTERY.register( "or_gate", () -> new OrGateBlock() );
 }

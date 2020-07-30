@@ -11,9 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.0.0.0_beta2] - 2020-07-29
+### Added
+- OR gate
+
 ## [1.0.0.0_beta1] - 2020-07-25
 ### Added
-- And gate
+- AND gate
 
 ### Changed
 - Renamed project to RedstoneXtra

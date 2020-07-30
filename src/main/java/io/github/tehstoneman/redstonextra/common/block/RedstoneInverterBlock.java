@@ -26,27 +26,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RedstoneInverterBlock extends HorizontalBlock
+public class RedstoneInverterBlock extends ComponantBaseBlock
 {
-	protected static final VoxelShape	SHAPE	= Block.makeCuboidShape( 0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D );
-	public static final BooleanProperty	POWERED	= BlockStateProperties.POWERED;
-
 	protected RedstoneInverterBlock()
 	{
-		super( Properties.from( Blocks.REPEATER ) );
 		setDefaultState( stateContainer.getBaseState().with( HORIZONTAL_FACING, Direction.NORTH ).with( POWERED, Boolean.valueOf( true ) ) );
-	}
-
-	@Override
-	public VoxelShape getShape( BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context )
-	{
-		return SHAPE;
-	}
-
-	@Override
-	public boolean isValidPosition( BlockState state, IWorldReader worldIn, BlockPos pos )
-	{
-		return hasSolidSideOnTop( worldIn, pos.down() );
 	}
 
 	@Override
@@ -56,12 +40,6 @@ public class RedstoneInverterBlock extends HorizontalBlock
 		final int power = getPowerFromSide( context.getWorld(), context.getPos(), direction );
 
 		return getDefaultState().with( HORIZONTAL_FACING, direction ).with( POWERED, power == 0 );
-	}
-
-	@Override
-	protected void fillStateContainer( StateContainer.Builder< Block, BlockState > builder )
-	{
-		builder.add( HORIZONTAL_FACING, POWERED );
 	}
 
 	@Override
@@ -88,19 +66,6 @@ public class RedstoneInverterBlock extends HorizontalBlock
 			for( final Direction direction : Direction.values() )
 				world.notifyNeighborsOfStateChange( thisPos.offset( direction ), this );
 
-		}
-	}
-
-	protected int getPowerFromSide( World world, BlockPos pos, Direction direction )
-	{
-		final BlockPos offset = pos.offset( direction );
-		final int power = world.getRedstonePower( offset, direction );
-		if( power > 0 )
-			return power;
-		else
-		{
-			final BlockState blockstate = world.getBlockState( offset );
-			return Math.max( power, blockstate.getBlock() == Blocks.REDSTONE_WIRE ? blockstate.get( RedstoneWireBlock.POWER ) : 0 );
 		}
 	}
 
@@ -143,12 +108,6 @@ public class RedstoneInverterBlock extends HorizontalBlock
 	}
 
 	@Override
-	public int getStrongPower( BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side )
-	{
-		return blockState.getWeakPower( blockAccess, pos, side );
-	}
-
-	@Override
 	public int getWeakPower( BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side )
 	{
 		if( !blockState.get( POWERED ) )
@@ -157,25 +116,20 @@ public class RedstoneInverterBlock extends HorizontalBlock
 			return blockState.get( HORIZONTAL_FACING ) == side ? getActiveSignal( blockAccess, pos, blockState ) : 0;
 	}
 
-	protected int getActiveSignal( IBlockReader world, BlockPos pos, BlockState state )
-	{
-		return 15;
-	}
-
 	@Override
 	@OnlyIn( Dist.CLIENT )
 	public void animateTick( BlockState state, World world, BlockPos pos, Random rand )
 	{
 		final Direction direction = state.get( HORIZONTAL_FACING );
-		final double d0 = pos.getX() + 0.5F + ( rand.nextFloat() - 0.5F ) * 0.2D;
-		final double d1 = pos.getY() + 0.4F + ( rand.nextFloat() - 0.5F ) * 0.2D;
-		final double d2 = pos.getZ() + 0.5F + ( rand.nextFloat() - 0.5F ) * 0.2D;
+		final double x = pos.getX() + 0.5F + ( rand.nextFloat() - 0.5F ) * 0.2D;
+		final double y = pos.getY() + 0.4F + ( rand.nextFloat() - 0.5F ) * 0.2D;
+		final double z = pos.getZ() + 0.5F + ( rand.nextFloat() - 0.5F ) * 0.2D;
 		float f = 7.0F;
 		if( state.get( POWERED ) )
 			f = -5.0F;
 		f = f / 16.0F;
 		final double d3 = f * direction.getXOffset();
 		final double d4 = f * direction.getZOffset();
-		world.addParticle( RedstoneParticleData.REDSTONE_DUST, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D );
+		world.addParticle( RedstoneParticleData.REDSTONE_DUST, x + d3, y, z + d4, 0.0D, 0.0D, 0.0D );
 	}
 }

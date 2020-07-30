@@ -9,7 +9,7 @@
 			[
 				{
 					"type": "minecraft:item",
-					"name": "redstonextra:inverter"
+					"name": "redstonextra:or_gate"
 				}
 			],
 			"conditions":

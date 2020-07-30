@@ -1,5 +1,6 @@
 {
 	"block.redstonextra.inverter": "Redstone Inverter",
-	"block.redstonextra.and_gate": "And Gate",
+	"block.redstonextra.and_gate": "AND Gate",
+	"block.redstonextra.or_gate": "OR Gate",
 	"itemGroup.redstonextra":"RedstoneXtra"
 }

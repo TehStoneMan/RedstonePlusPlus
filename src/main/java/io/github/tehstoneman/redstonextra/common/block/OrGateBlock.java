@@ -2,26 +2,34 @@ package io.github.tehstoneman.redstonextra.common.block;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class AndGateBlock extends ComponantBaseBlock
+public class OrGateBlock extends ComponantBaseBlock
 {
-	public static final BooleanProperty	A	= BooleanProperty.create( "a" );
-	public static final BooleanProperty	B	= BooleanProperty.create( "b" );
+	public static final BooleanProperty	A		= BooleanProperty.create( "a" );
+	public static final BooleanProperty	B		= BooleanProperty.create( "b" );
 
-	protected AndGateBlock()
+	protected OrGateBlock()
 	{
 		setDefaultState( stateContainer.getBaseState().with( HORIZONTAL_FACING, Direction.NORTH ).with( A, Boolean.valueOf( false ) )
 				.with( B, Boolean.valueOf( false ) ).with( POWERED, Boolean.valueOf( false ) ) );
@@ -33,7 +41,7 @@ public class AndGateBlock extends ComponantBaseBlock
 		final Direction direction = context.getPlacementHorizontalFacing().getOpposite();
 		final int powerA = getPowerFromSide( context.getWorld(), context.getPos(), direction.rotateY() );
 		final int powerB = getPowerFromSide( context.getWorld(), context.getPos(), direction.rotateYCCW() );
-		final int powerOutput = Math.min( powerA, powerB );
+		final int powerOutput = Math.max( powerA, powerB );
 
 		return getDefaultState().with( HORIZONTAL_FACING, direction ).with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, powerOutput > 0 );
 	}
@@ -54,7 +62,7 @@ public class AndGateBlock extends ComponantBaseBlock
 			final boolean isPowered = thisState.get( POWERED );
 			final int powerA = getPowerFromSide( world, thisPos, direction.rotateY() );
 			final int powerB = getPowerFromSide( world, thisPos, direction.rotateYCCW() );
-			final int powerOutput = Math.min( powerA, powerB );
+			final int powerOutput = Math.max( powerA, powerB );
 
 			world.setBlockState( thisPos, thisState.with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, powerOutput > 0 ), 3 );
 		}
@@ -72,9 +80,10 @@ public class AndGateBlock extends ComponantBaseBlock
 	}
 
 	@Override
-	public int getStrongPower( BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side )
+	public boolean canConnectRedstone( BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side )
 	{
-		return blockState.getWeakPower( blockAccess, pos, side );
+		final Direction facing = state.get( HORIZONTAL_FACING );
+		return side != null && side.getYOffset() == 0 && side != facing.getOpposite();
 	}
 
 	@Override
