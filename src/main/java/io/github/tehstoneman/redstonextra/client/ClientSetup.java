@@ -17,6 +17,8 @@ public class ClientSetup
 	{
 		RenderTypeLookup.setRenderLayer( RedstoneXtraBlocks.REDSTONE_INVERTER.get(), RenderType.getCutout() );
 		RenderTypeLookup.setRenderLayer( RedstoneXtraBlocks.AND_GATE.get(), RenderType.getCutout() );
+		RenderTypeLookup.setRenderLayer( RedstoneXtraBlocks.NAND_GATE.get(), RenderType.getCutout() );
+		RenderTypeLookup.setRenderLayer( RedstoneXtraBlocks.NOR_GATE.get(), RenderType.getCutout() );
 		RenderTypeLookup.setRenderLayer( RedstoneXtraBlocks.OR_GATE.get(), RenderType.getCutout() );
 	}
 }

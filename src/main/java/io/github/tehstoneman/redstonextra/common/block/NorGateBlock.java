@@ -13,12 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class OrGateBlock extends ComponantBaseBlock
+public class NorGateBlock extends ComponantBaseBlock
 {
 	public static final BooleanProperty	A	= BooleanProperty.create( "a" );
 	public static final BooleanProperty	B	= BooleanProperty.create( "b" );
 
-	protected OrGateBlock()
+	protected NorGateBlock()
 	{
 		setDefaultState( stateContainer.getBaseState().with( HORIZONTAL_FACING, Direction.NORTH ).with( A, Boolean.valueOf( false ) )
 				.with( B, Boolean.valueOf( false ) ).with( POWERED, Boolean.valueOf( false ) ) );
@@ -32,7 +32,7 @@ public class OrGateBlock extends ComponantBaseBlock
 		final int powerB = getPowerFromSide( context.getWorld(), context.getPos(), direction.rotateYCCW() );
 		final boolean powerOutput = powerA > 0 || powerB > 0;
 
-		return getDefaultState().with( HORIZONTAL_FACING, direction ).with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, powerOutput );
+		return getDefaultState().with( HORIZONTAL_FACING, direction ).with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, !powerOutput );
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class OrGateBlock extends ComponantBaseBlock
 			final int powerB = getPowerFromSide( world, thisPos, direction.rotateYCCW() );
 			final boolean powerOutput = powerA > 0 || powerB > 0;
 
-			world.setBlockState( thisPos, thisState.with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, powerOutput ), 3 );
+			world.setBlockState( thisPos, thisState.with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, !powerOutput ), 3 );
 		}
 		else
 		{

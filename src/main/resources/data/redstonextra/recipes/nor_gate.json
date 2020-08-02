@@ -1,6 +1,6 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"group": "redstonextra:or_gate",
+	"group": "redstonextra:nor_gate",
 	"pattern":
 	[
 		"#",
@@ -10,8 +10,8 @@
 	"key":
 	{
 		"#": { "tag": "forge:dusts/redstone" },
-		"X": { "item": "minecraft:repeater" },
+		"X": { "item": "redstonextra:inverter" },
 		"Q": { "tag": "forge:gems/quartz" }
 	},
-	"result": { "item": "redstonextra:or_gate" }
+	"result": { "item": "redstonextra:nor_gate" }
 }

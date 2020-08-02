@@ -2,7 +2,7 @@
 	"parent": "minecraft:recipes/root",
 	"rewards":
 	{
-		"recipes": [ "redstonextra:or_gate" ]
+		"recipes": [ "redstonextra:nor_gate" ]
 	},
 	"criteria":
 	{
@@ -13,14 +13,14 @@
 			{
 				"items":
 				[
-					{ "item": "minecraft:repeater" }
+					{ "item": "redstonextra:inverter" }
 				]
 			}
 		},
 		"has_the_recipe":
 		{
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions": { "recipe": "redstonextra:or_gate" }
+			"conditions": { "recipe": "redstonextra:nor_gate" }
 		}
 	},
 	"requirements":

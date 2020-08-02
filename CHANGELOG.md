@@ -11,6 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.0.0.0_beta3] - 2020-08-01
+### Added
+- NAND gate
+- NOR gate
+
+### Changed
+- AND gate textures and recipe
+- OR gate textures and recipe
+
 ## [1.0.0.0_beta2] - 2020-07-29
 ### Added
 - OR gate

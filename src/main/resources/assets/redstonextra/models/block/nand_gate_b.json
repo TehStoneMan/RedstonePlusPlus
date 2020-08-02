@@ -1,10 +1,9 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "redstonextra:block/or_gate_off",
+        "particle": "redstonextra:block/nand_gate",
         "slab": "block/smooth_stone",
-        "active": "redstonextra:block/or_gate_on",
-        "inactive": "redstonextra:block/or_gate_off",
+        "top": "redstonextra:block/nand_gate",
         "lit": "block/redstone_torch",
         "unlit": "block/redstone_torch_off"
     },
@@ -13,22 +12,11 @@
             "to": [ 16, 2, 16 ],
             "faces": {
                 "down":  { "uv": [ 0,  0, 16, 16 ], "texture": "#slab", "cullface": "down" },
+                "up":    { "uv": [ 0,  0, 16, 16 ], "texture": "#top" },
                 "north": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "north" },
                 "south": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "south" },
                 "west":  { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "west" },
                 "east":  { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "east" }
-            }
-        },
-        {   "from": [ 0, 0, 0 ],
-            "to": [ 7, 2, 16 ],
-            "faces": {
-                "up":    { "uv": [ 0,  0, 7, 16 ], "texture": "#inactive" }
-            }
-        },
-        {   "from": [ 7, 0, 0 ],
-            "to": [ 16, 2, 16 ],
-            "faces": {
-                "up":    { "uv": [ 7,  0, 16, 16 ], "texture": "#active" }
             }
         },
         {   "from": [ 12, 7, 7 ],

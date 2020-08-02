@@ -1,6 +1,6 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"group": "redstonextra:and_gate",
+	"group": "redstonextra:nand_gate",
 	"pattern":
 	[
 		"#",
@@ -10,8 +10,8 @@
 	"key":
 	{
 		"#": { "tag": "minecraft:wooden_buttons" },
-		"X": { "item": "minecraft:repeater" },
+		"X": { "item": "redstonextra:inverter" },
 		"Q": { "tag": "forge:gems/quartz" }
 	},
-	"result": { "item": "redstonextra:and_gate" }
+	"result": { "item": "redstonextra:nand_gate" }
 }

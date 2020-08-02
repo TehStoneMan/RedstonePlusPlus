@@ -19,4 +19,8 @@ public class RedstoneXtraItems
 			() -> new BlockItem( RedstoneXtraBlocks.AND_GATE.get(), new Item.Properties().group( RedstoneXtra.ITEM_GROUP ) ) );
 	public static RegistryObject< BlockItem >		OR_GATE				= REGISTERY.register( "or_gate",
 			() -> new BlockItem( RedstoneXtraBlocks.OR_GATE.get(), new Item.Properties().group( RedstoneXtra.ITEM_GROUP ) ) );
+	public static RegistryObject< BlockItem >		NAND_GATE			= REGISTERY.register( "nand_gate",
+			() -> new BlockItem( RedstoneXtraBlocks.NAND_GATE.get(), new Item.Properties().group( RedstoneXtra.ITEM_GROUP ) ) );
+	public static RegistryObject< BlockItem >		NOR_GATE			= REGISTERY.register( "nor_gate",
+			() -> new BlockItem( RedstoneXtraBlocks.NOR_GATE.get(), new Item.Properties().group( RedstoneXtra.ITEM_GROUP ) ) );
 }

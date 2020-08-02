@@ -1,7 +1,5 @@
 package io.github.tehstoneman.redstonextra.common.block;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
@@ -13,12 +11,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class OrGateBlock extends ComponantBaseBlock
+public class NandGateBlock extends ComponantBaseBlock
 {
 	public static final BooleanProperty	A	= BooleanProperty.create( "a" );
 	public static final BooleanProperty	B	= BooleanProperty.create( "b" );
 
-	protected OrGateBlock()
+	protected NandGateBlock()
 	{
 		setDefaultState( stateContainer.getBaseState().with( HORIZONTAL_FACING, Direction.NORTH ).with( A, Boolean.valueOf( false ) )
 				.with( B, Boolean.valueOf( false ) ).with( POWERED, Boolean.valueOf( false ) ) );
@@ -30,9 +28,9 @@ public class OrGateBlock extends ComponantBaseBlock
 		final Direction direction = context.getPlacementHorizontalFacing().getOpposite();
 		final int powerA = getPowerFromSide( context.getWorld(), context.getPos(), direction.rotateY() );
 		final int powerB = getPowerFromSide( context.getWorld(), context.getPos(), direction.rotateYCCW() );
-		final boolean powerOutput = powerA > 0 || powerB > 0;
+		final boolean powerOutput = powerA > 0 && powerB > 0;
 
-		return getDefaultState().with( HORIZONTAL_FACING, direction ).with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, powerOutput );
+		return getDefaultState().with( HORIZONTAL_FACING, direction ).with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, !powerOutput );
 	}
 
 	@Override
@@ -51,9 +49,9 @@ public class OrGateBlock extends ComponantBaseBlock
 			final boolean isPowered = thisState.get( POWERED );
 			final int powerA = getPowerFromSide( world, thisPos, direction.rotateY() );
 			final int powerB = getPowerFromSide( world, thisPos, direction.rotateYCCW() );
-			final boolean powerOutput = powerA > 0 || powerB > 0;
+			final boolean powerOutput = powerA > 0 && powerB > 0;
 
-			world.setBlockState( thisPos, thisState.with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, powerOutput ), 3 );
+			world.setBlockState( thisPos, thisState.with( A, powerA > 0 ).with( B, powerB > 0 ).with( POWERED, !powerOutput ), 3 );
 		}
 		else
 		{
@@ -69,10 +67,9 @@ public class OrGateBlock extends ComponantBaseBlock
 	}
 
 	@Override
-	public boolean canConnectRedstone( BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side )
+	public int getStrongPower( BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side )
 	{
-		final Direction facing = state.get( HORIZONTAL_FACING );
-		return side != null && side.getYOffset() == 0 && side != facing.getOpposite();
+		return blockState.getWeakPower( blockAccess, pos, side );
 	}
 
 	@Override
