@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.0.0.0_beta4] - 2020-08-09
+### Added
+- XOR gate
+- XNOR gate
+
 ## [1.0.0.0_beta3] - 2020-08-01
 ### Added
 - NAND gate

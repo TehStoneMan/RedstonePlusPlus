@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "a=false,b=false,powered=true": { "model": "redstonextra:block/invalid" },
+        "facing=south,a=false,b=false,powered=false": { "model": "redstonextra:block/xor_gate_off" },
+        "facing=west,a=false,b=false,powered=false": { "model": "redstonextra:block/xor_gate_off", "y": 90 },
+        "facing=north,a=false,b=false,powered=false": { "model": "redstonextra:block/xor_gate_off", "y": 180 },
+        "facing=east,a=false,b=false,powered=false": { "model": "redstonextra:block/xor_gate_off", "y": 270 },
+        "facing=south,a=true,b=false,powered=true": { "model": "redstonextra:block/xor_gate_a" },
+        "facing=west,a=true,b=false,powered=true": { "model": "redstonextra:block/xor_gate_a", "y": 90 },
+        "facing=north,a=true,b=false,powered=true": { "model": "redstonextra:block/xor_gate_a", "y": 180 },
+        "facing=east,a=true,b=false,powered=true": { "model": "redstonextra:block/xor_gate_a", "y": 270 },
+        "facing=south,a=false,b=true,powered=true": { "model": "redstonextra:block/xor_gate_b" },
+        "facing=west,a=false,b=true,powered=true": { "model": "redstonextra:block/xor_gate_b", "y": 90 },
+        "facing=north,a=false,b=true,powered=true": { "model": "redstonextra:block/xor_gate_b", "y": 180 },
+        "facing=east,a=false,b=true,powered=true": { "model": "redstonextra:block/xor_gate_b", "y": 270 },
+        "facing=south,a=true,b=true,powered=false": { "model": "redstonextra:block/xor_gate_ab" },
+        "facing=west,a=true,b=true,powered=false": { "model": "redstonextra:block/xor_gate_ab", "y": 90 },
+        "facing=north,a=true,b=true,powered=false": { "model": "redstonextra:block/xor_gate_ab", "y": 180 },
+        "facing=east,a=true,b=true,powered=false": { "model": "redstonextra:block/xor_gate_ab", "y": 270 }
+    }
+}

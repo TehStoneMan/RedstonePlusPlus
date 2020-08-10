@@ -4,5 +4,7 @@
 	"block.redstonextra.nand_gate": "NAND Gate",
 	"block.redstonextra.nor_gate": "NOR Gate",
 	"block.redstonextra.or_gate": "OR Gate",
+	"block.redstonextra.xor_gate": "XOR Gate",
+	"block.redstonextra.xnor_gate": "XNOR Gate",
 	"itemGroup.redstonextra":"RedstoneXtra"
 }

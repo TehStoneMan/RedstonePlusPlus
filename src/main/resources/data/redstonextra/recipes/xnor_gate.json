@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "redstonextra:xnor_gate",
+	"pattern":
+	[
+		"#",
+		"X"
+	],
+	"key":
+	{
+		"#": { "tag": "minecraft:wooden_buttons" },
+		"X": { "item": "redstonextra:nor_gate" }
+	},
+	"result": { "item": "redstonextra:xnor_gate" }
+}

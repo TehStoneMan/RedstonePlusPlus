@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:block",
+	"pools":
+	[
+		{
+			"name": "restonextra",
+			"rolls": 1,
+			"entries":
+			[
+				{
+					"type": "minecraft:item",
+					"name": "redstonextra:xnor_gate"
+				}
+			],
+			"conditions":
+			[
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		}
+	]
+}
